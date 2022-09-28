@@ -7,6 +7,7 @@ export default function Home() {
     const formData = new FormData(e.target);
     const email = formData.get("EMAIL");
     await axios.post("/api/postMailchimp", { email });
+    e.target.reset();
   };
   return (
     <>
