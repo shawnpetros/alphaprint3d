@@ -222,7 +222,7 @@ button:focus {
   z-index: -1;
 }
 
-@media (max-width: 750px) {
+@media (max-width: 400px) {
   #background-video {
     display: none;
   }
