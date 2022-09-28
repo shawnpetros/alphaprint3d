@@ -1,22 +1,11 @@
-import MailchimpSubscribe from "react-mailchimp-subscribe";
-import video from "../assets/3dprint.mp4";
 import axios from "axios";
 
 export default function App() {
-  const url =
-    "https://alphaprint3d.us8.list-manage.com/subscribe/post?u=8ff9ff93a268e168508a539a1&amp;id=0933557fe1&amp;f_id=00a065e0f0";
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const email = formData.get("EMAIL");
-    console.log("clicked", {
-      email: formData.get("EMAIL"),
-    });
-    // const zen = await fetch("https://api.github.com/zen").then((res) =>
-    //   res.text()
-    // );
-    const res = await axios.post(url + email, formData);
-    console.log("clicked", { res });
+    await axios.post("/api/postMailchimp", { email });
   };
   return (
     <div>
@@ -25,65 +14,18 @@ export default function App() {
         autoPlay
         loop
         muted
-        poster="https://assets.codepen.io/6093409/river.jpg"
+        // poster="https://assets.codepen.io/6093409/river.jpg"
       >
-        <source src={video} type="video/mp4" />
+        <source src="/assets/3dprint.mp4" type="video/mp4" />
       </video>
       <div className="bg-layout">
         <div className="middle">
           <div className="content">
             <h1>COMING SOON</h1>
             <p>
-              We will be launch soon, enter your email address and get our early
-              notification.
+              We will be launching soon, enter your email address to subscribe
+              for updates.
             </p>
-
-            {/* <div className="subscribe-container">
-              <div id={`mc_embed_signup`}>
-                <form
-                  action={url}
-                  method="post"
-                  id={`mc-embedded-subscribe-form`}
-                  name="mc-embedded-subscribe-form"
-                  className="validate"
-                  target="_blank"
-                >
-                  <div id={`mc_embed_signup_scroll`}>
-                    <input
-                      type="email"
-                      defaultValue=""
-                      name="EMAIL"
-                      className="subscribe-container__email"
-                      id={`mce-EMAIL`}
-                      placeholder="Your email address"
-                      required
-                    />
-                    <div
-                      style={{ position: "absolute", left: "-5000px" }}
-                      aria-hidden="true"
-                    >
-                      <input
-                        type="text"
-                        name="b_5f0b91c96bbdf35913a136639_ddfba3375e"
-                        tabIndex={-1}
-                        defaultValue=""
-                      />
-                    </div>
-                    <div>
-                      <button
-                        type="submit"
-                        defaultValue="Subscribe"
-                        name="subscribe"
-                        id={`mc-embedded-subscribe`}
-                        className="button"
-                      >
-                        Subscribe
-                      </button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div> */}
 
             <form {...{ onSubmit, id: "subscribe" }}>
               <input
